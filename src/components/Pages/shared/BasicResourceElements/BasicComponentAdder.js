@@ -33,7 +33,7 @@ export default function BasicComponentAdder(props) {
     }
 
     return (
-        <div className="link-adder bg-dark p-3 mb-5">
+        <section className="link-adder bg-dark p-3 mb-5">
             <h6 className="display-6">Create new {props.name}</h6>
             <form onSubmit={submitForm}>
                 <ElementEditor  saveResource={saveResource} handleSavingFail={handleSavingFail} isSaving={isSaving}/>
@@ -41,6 +41,6 @@ export default function BasicComponentAdder(props) {
                     Save
                 </button>
             </form>
-        </div>
+        </section>
     );
 }

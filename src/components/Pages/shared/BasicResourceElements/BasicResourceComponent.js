@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RequestHelper from "../../Helpers/RequestHelper";
+import RequestHelper from "../../../../Helpers/RequestHelper";
 import BasicSingleResourceBlock from "./BasicSingleResourceBlock";
 import BasicComponentAdder from "./BasicComponentAdder";
 import {useAlert} from "react-alert";

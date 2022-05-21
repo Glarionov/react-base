@@ -2,28 +2,24 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Routes,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 
-import ExampleMain from "../Examples/ExampleMain";
+import routes from "./routes";
 
 export default function Body(props) {
-
-    let routes = {
-        'example': {path: 'example', component: ExampleMain},
-    }
-
     return (
-        <Router>
-            <Routes>
-                {Object.entries(routes).map(
-                    ([routeKey, route]) => {
-                        let Component = route.component;
-                        return <Route key={routeKey} path={"/" + route.path} element={<Component {...props} />}/>
-                    })
-                }
-            </Routes>
-        </Router>
+        <main className="container">
+            <Router>
+                <Routes>
+                    {Object.entries(routes).map(
+                        ([routeKey, route]) => {
+                            let Component = route[1];
+                            return <Route key={routeKey} path={"/" + route[0]} element={<Component {...props} />}/>
+                        })
+                    }
+                </Routes>
+            </Router>
+        </main>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicResourceComponent from "../BasicResourceElements/BasicResourceComponent";
+import BasicResourceComponent from "../shared/BasicResourceElements/BasicResourceComponent";
 
 import ExampleSingle from "./ExampleSingle";
 import ExampleEditor from "./ExampleEditor";
