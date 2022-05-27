@@ -43,6 +43,22 @@ export default function BasicEditorWrapper(props) {
         event.preventDefault();
     }
 
+    const handleFileEdit = (name, file) => {
+        if (props.hasOwnProperty('validationRules')) {
+            setEditingPropsMessages(
+                prevState => {
+                    return FormHelper.validateFormValue(prevState, props.validationRules, name, file);
+                }
+            );
+        }
+
+        setEditingProps(
+            prevState => {
+                return {...prevState, [name]: file}
+
+            });
+    }
+
 
     /**
      * Validates data and sends save request
@@ -65,13 +81,14 @@ export default function BasicEditorWrapper(props) {
     }
 
     let ExtraLayer = DefaultEditorExtraLayer;
-    if (props.hasOwnProperty('ExtraLayer')) {
-        ExtraLayer = props.ExtraLayer;
+    if (props.hasOwnProperty('EditorExtraLayer')) {
+        ExtraLayer = props.EditorExtraLayer;
     }
 
     return (
         <ExtraLayer
             handleEdit={handleEdit.bind(this)}
+            handleFileEdit={handleFileEdit.bind(this)}
             editingProps={editingProps} formElements={props.formElements}
             editingPropsMessages={editingPropsMessages}
             message={message}

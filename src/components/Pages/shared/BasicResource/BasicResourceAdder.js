@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAlert } from 'react-alert'
 
-export default function BasicComponentAdder(props) {
+export default function BasicResourceAdder(props) {
     const alert = useAlert();
     const [isSaving, setIsSaving] = useState(false);
     const ElementEditor = props.ElementEditor;
@@ -35,8 +35,11 @@ export default function BasicComponentAdder(props) {
     return (
         <section className="link-adder bg-dark p-3 mb-5">
             <h6 className="display-6">Create new {props.name}</h6>
-            <form onSubmit={submitForm}>
-                <ElementEditor  saveResource={saveResource} handleSavingFail={handleSavingFail} isSaving={isSaving}/>
+            <form onSubmit={submitForm} encType='multipart/form-data'>
+                <ElementEditor
+                    EditorExtraLayer={props.EditorExtraLayer}
+                    formElements={props.formElements}
+                    saveResource={saveResource} handleSavingFail={handleSavingFail} isSaving={isSaving}/>
                 <button type="summit" className="btn-success mt-3">
                     Save
                 </button>

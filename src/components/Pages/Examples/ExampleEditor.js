@@ -1,26 +1,14 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import BasicEditorWrapper from "../shared/BasicResourceElements/BasicEditorWrapper";
-import ExampleEditorExtraLayer from "./ExampleEditorExtraLayer";
+import BasicEditorWrapper from "../shared/BasicResource/BasicEditorWrapper";
 
 export default function ExampleEditor(props) {
-
-    let formElements = [
-        {type: 'text', name: 'text', text: 'text'},
-        {type: 'number', name: 'number', text: 'number'},
-        {type: 'textarea', name: 'textarea', text: 'textarea'},
-        {type: 'date', name: 'date', text: 'date'},
-    ];
-
-    let validationRules = {
-        text: {max: 6, min: 2},
-        textarea: ['required'],
-        number: {max: 3}
-    };
-
+    /**
+     * This class actually does nothing more than just calling BasicEditorWrapper
+     * It's here just for a stub, as you can add here you own editor's logic
+     */
     return (
         <BasicEditorWrapper
-            {...props} formElements={formElements} validationRules={validationRules}
-            ExtraLayer={ExampleEditorExtraLayer}
+            {...props}
         />
     );
 }

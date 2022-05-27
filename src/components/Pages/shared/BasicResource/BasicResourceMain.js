@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import RequestHelper from "../../../../Helpers/RequestHelper";
-import BasicSingleResourceBlock from "./BasicSingleResourceBlock";
-import BasicComponentAdder from "./BasicComponentAdder";
+
 import {useAlert} from "react-alert";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import {formElements, validationRules} from "../../Examples/ExampleFormElements";
+import BasicEditorWrapper from "./BasicEditorWrapper";
+import BasicResourceSingle from "./BasicResourceSingle";
+import BasicResourceAdder from "./BasicResourceAdder";
 
-export default function BasicResourceComponent(props) {
+export default function BasicResourceMain(props) {
     const alert = useAlert();
     const [mainElements, setMainElements] = useState({});
     const [hasMore, setHasMore] = useState(true);
@@ -18,7 +21,9 @@ export default function BasicResourceComponent(props) {
 
     useEffect(
         () => {
-            loadMainElements();
+            if (!props.hasOwnProperty('disableInitialLoad') || !props.disableInitialLoad) {
+                loadMainElements();
+            }
         },[]
     );
 
@@ -135,11 +140,21 @@ export default function BasicResourceComponent(props) {
         });
     }
 
+    let ElementEditor;
+    if (props.hasOwnProperty('ElementEditor')) {
+        ElementEditor = props.ElementEditor;
+    } else {
+        ElementEditor = BasicEditorWrapper;
+    }
+
     return (
         <section className="base-resource-component">
             <div className="base-resource-component__adder">
-                <BasicComponentAdder
-                    ElementEditor={props.ElementEditor}
+                <BasicResourceAdder
+                    ElementEditor={ElementEditor}
+                    EditorExtraLayer={props.EditorExtraLayer}
+                    formElements={props.formElements}
+                    validationRules={props.validationRules}
                     name={props.name}
                     createElement={createElement}
                 />
@@ -159,9 +174,12 @@ export default function BasicResourceComponent(props) {
                     {Object.entries(mainElements).map(
                         ([mainElementIndex, mainElement]) =>
                             (
-                                <BasicSingleResourceBlock
-                                    ElementEditor={props.ElementEditor}
+                                <BasicResourceSingle
+                                    ElementEditor={ElementEditor}
                                     ElementSingle={props.ElementSingle}
+                                    EditorExtraLayer={props.EditorExtraLayer}
+                                    formElements={props.formElements}
+                                    validationRules={props.validationRules}
                                     key={mainElementIndex}
                                     {...mainElement}
                                     openDeleteConfirmation={openDeleteConfirmation.bind(this)}

@@ -8,7 +8,7 @@ export default function FormBuilder(props) {
                 return (
                     <FormElement key={formElementIndex} type={formElement.type} text={formElement.text}
                                  value={props.editingProps[formElement.name]} name={[formElement.name]}
-                                 handleEdit={props.handleEdit}
+                                 handleEdit={formElement.type === 'file'? props.handleFileEdit: props.handleEdit}
                                  editingPropsMessages={props.editingPropsMessages[formElement.name] ?? {}}
                     />
                 )

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAlert } from 'react-alert'
 
-export default function BasicSingleResourceBlock(props) {
+export default function BasicResourceSingle(props) {
     const alert = useAlert();
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
@@ -21,7 +21,7 @@ export default function BasicSingleResourceBlock(props) {
 
     let DisplayingComponent, DisplayingButtons;
     if (isEditing) {
-        DisplayingComponent =  props.EditingComponent;
+        DisplayingComponent =  props.ElementEditor;
         DisplayingButtons = (
             <React.Fragment>
                 <button type="button" className="btn btn-warning"
@@ -60,6 +60,9 @@ export default function BasicSingleResourceBlock(props) {
                 <div className="col-12 col-md-9">
                     <DisplayingComponent {...props} isSaving={isSaving} saveResource={saveResource}
                         handleSavingFail={handleSavingFail}
+                         EditorExtraLayer={props.EditorExtraLayer}
+                         formElements={props.formElements}
+                         validationRules={props.validationRules}
                     />
                 </div>
                 <div className="col-12 col-md-3">
